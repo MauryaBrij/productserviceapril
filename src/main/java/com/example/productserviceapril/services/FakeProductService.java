@@ -65,7 +65,7 @@ public class FakeProductService implements ProductService{
         Category category = new Category();
 
         category.setId(0);
-        category.setTitle(String.valueOf(fakeStoreProductDto.getCategory()));
+        category.setTitle(fakeStoreProductDto.getCategory());
 
         product.setCategory(category);
 

@@ -41,8 +41,11 @@ public class FakeProductService implements ProductService{
     }
 
     @Override
-    public Product updateProduct() {
-        return null;
+    public Product updateProduct(Long id, Product product) {
+        FakeStoreProductDto fakeStoreProductDto = convertProductToDto(product);
+        fakeStoreProductDto = restTemplate.patchForObject(
+                "https://fakestoreapi.com/products/"+ id, fakeStoreProductDto, FakeStoreProductDto.class);
+        return convertFakeStoreProductDtoToProduct(fakeStoreProductDto);
     }
 
     @Override
@@ -76,7 +79,7 @@ public class FakeProductService implements ProductService{
 
         Category category = new Category();
 
-        category.setId(0);
+        category.setId(0L);
         category.setTitle(fakeStoreProductDto.getCategory());
 
         product.setCategory(category);
